@@ -41,6 +41,47 @@ app.include_router(users_router)
 def on_startup():
     Base.metadata.create_all(bind=engine)
     os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+    
+    # Initialize baseline administrative & recruiter accounts if missing
+    try:
+        from app.database import SessionLocal
+        from app.models.user import User
+        from app.core.security import hash_password
+        from sqlalchemy import func
+
+        with SessionLocal() as db:
+            staff_accounts = [
+                {
+                    "id": "admin-1",
+                    "email": "admin@recruitment.ai",
+                    "password_hash": hash_password("admin123"),
+                    "full_name": "System Administrator",
+                    "role": "admin"
+                },
+                {
+                    "id": "recruiter-1",
+                    "email": "recruiter@recruitment.ai",
+                    "password_hash": hash_password("recruiter123"),
+                    "full_name": "Alex Morgan",
+                    "role": "recruiter"
+                }
+            ]
+            for staff in staff_accounts:
+                norm_email = staff["email"].strip().lower()
+                existing = db.query(User).filter(func.lower(User.email) == norm_email).first()
+                if not existing:
+                    user = User(
+                        id=staff["id"],
+                        email=norm_email,
+                        password_hash=staff["password_hash"],
+                        full_name=staff["full_name"],
+                        role=staff["role"]
+                    )
+                    db.add(user)
+            db.commit()
+    except Exception as e:
+        print(f"Notice: Staff account initialization check: {e}")
+
     # Background warm-up
     import threading
     def load():

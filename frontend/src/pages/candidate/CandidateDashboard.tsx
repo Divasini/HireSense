@@ -139,10 +139,10 @@ export const CandidateDashboard: React.FC = () => {
 
           <div className="space-y-2">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-warm-white">
-              Your career analysis starts here
+              Welcome back, <span className="text-emerald-400">{candidateName}</span>
             </h1>
             <p className="text-xs sm:text-sm text-sage-muted leading-relaxed max-w-2xl">
-              Upload your resume to unlock AI-powered resume analysis, ATS scoring, job matching, and interview preparation.
+              Upload your resume to unlock AI-powered screening.
             </p>
           </div>
 

@@ -104,22 +104,21 @@ npm run build
 
 ---
 
-## 🔑 Demo Access Credentials
+## 🔑 Staff Access Credentials
 
 | Role | Email | Password | Direct Portal |
 | :--- | :--- | :--- | :--- |
 | **Recruiter** | `recruiter@recruitment.ai` | `recruiter123` | `/recruiter` |
-| **Candidate** | `sarah.chen@email.com` | `candidate123` | `/candidate` |
 | **Admin** | `admin@recruitment.ai` | `admin123` | `/admin` |
 
-*(One-click demo login buttons are also available directly on the `/login` screen)*
+*(Candidates register their own individual accounts via the `/register` portal with immediate access to their candidate dashboard).*
 
 ---
 
-## 📊 Benchmark Jobs & Candidates Included
+## 📊 Benchmark Jobs Included
 
-1. **Senior Data Analyst** — *Apex Analytics* (Sarah Chen 88% Rank #1, David Kumar 78%, Priya Sharma 52%)
-2. **Full Stack Developer** — *CloudScale Tech* (Marcus Vance 94% Rank #1, Hannah Lee 82%, Julian Becker 48%)
-3. **Machine Learning Engineer** — *NeuroLogic AI* (Dr. Elena Rostova 96% Rank #1, Liam O'Connor 84%, Kevin Zhang 55%)
-4. **DevOps Engineer** — *Infrastructure Core* (Arjun Patel 91% Rank #1, Zoe Martinez 79%, Tom Wilson 44%)
-5. **Business Analyst** — *Global Financial Insights* (Emily Watson 89% Rank #1, Carlos Mendez 76%, Rachel Green 49%)
+1. **Senior Data Analyst** — *Apex Analytics Inc.*
+2. **Full Stack Developer** — *CloudScale Technologies*
+3. **Machine Learning Engineer** — *Cognitive AI Labs*
+4. **DevOps & Cloud Engineer** — *SkyHigh Cloud Services*
+5. **Business Intelligence Analyst** — *Midwest Financial Partners*

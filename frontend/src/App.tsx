@@ -62,6 +62,7 @@ function App() {
         {/* Recruiter Routes */}
         <Route path="/recruiter" element={<ProtectedRoute allowedRoles={['recruiter', 'admin']} />}>
           <Route index element={<RecruiterDashboard />} />
+          <Route path="dashboard" element={<Navigate to="/recruiter" replace />} />
           <Route path="jobs" element={<JobsPage />} />
           <Route path="jobs/create" element={<CreateJobPage />} />
           <Route path="jobs/:id" element={<JobDetailPage />} />
@@ -76,10 +77,12 @@ function App() {
           <Route path="interview-questions/:id" element={<InterviewQuestionsPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
         </Route>
+        <Route path="/recruiter/dashboard" element={<Navigate to="/recruiter" replace />} />
 
         {/* Candidate Routes */}
         <Route path="/candidate" element={<ProtectedRoute allowedRoles={['candidate', 'admin']} />}>
           <Route index element={<CandidateDashboard />} />
+          <Route path="dashboard" element={<Navigate to="/candidate" replace />} />
           <Route path="profile" element={<MyProfilePage />} />
           <Route path="resume" element={<MyResumePage />} />
           <Route path="analysis" element={<ResumeAnalysisPage />} />
@@ -91,15 +94,18 @@ function App() {
           <Route path="notifications" element={<NotificationsPage />} />
           <Route path="settings" element={<CandidateSettingsPage />} />
         </Route>
+        <Route path="/candidate/dashboard" element={<Navigate to="/candidate" replace />} />
 
         {/* Admin Routes */}
         <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route index element={<AdminDashboard />} />
+          <Route path="dashboard" element={<Navigate to="/admin" replace />} />
           <Route path="users" element={<UserManagementPage />} />
           <Route path="jobs" element={<JobManagementPage />} />
           <Route path="audit-logs" element={<AuditLogsPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>
+        <Route path="/admin/dashboard" element={<Navigate to="/admin" replace />} />
 
         {/* Catch-all fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />

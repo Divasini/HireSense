@@ -8,7 +8,16 @@ interface ProtectedRouteProps {
 }
 
 export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
-  const { isAuthenticated, user } = useAuthStore()
+  const { isAuthenticated, user, isInitializing } = useAuthStore()
+
+  if (isInitializing) {
+    return (
+      <div className="min-h-screen bg-obsidian flex flex-col items-center justify-center gap-3">
+        <div className="w-8 h-8 border-2 border-emerald border-t-transparent rounded-full animate-spin" />
+        <p className="text-xs text-sage-muted font-mono tracking-wider uppercase">Verifying session...</p>
+      </div>
+    )
+  }
 
   if (!isAuthenticated || !user) {
     return <Navigate to="/login" replace />

@@ -13,8 +13,17 @@ export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const { login } = useAuthStore()
+  const { login, isAuthenticated, user } = useAuthStore()
   const navigate = useNavigate()
+
+  // If already authenticated, redirect to the user's dashboard
+  React.useEffect(() => {
+    if (isAuthenticated && user) {
+      if (user.role === 'admin') navigate('/admin', { replace: true })
+      else if (user.role === 'candidate') navigate('/candidate', { replace: true })
+      else navigate('/recruiter', { replace: true })
+    }
+  }, [isAuthenticated, user, navigate])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -25,15 +34,27 @@ export const LoginPage: React.FC = () => {
 
     try {
       setLoading(true)
-      await login(email, password)
+      await login(email.trim(), password)
+      
+      const currentUser = useAuthStore.getState().user
+      if (!currentUser) {
+        throw new Error('User profile could not be loaded after sign-in')
+      }
+
       toast.success('Signed in successfully!')
       
-      const user = useAuthStore.getState().user
-      if (user?.role === 'admin') navigate('/admin')
-      else if (user?.role === 'candidate') navigate('/candidate')
-      else navigate('/recruiter')
-    } catch {
-      toast.error('Invalid email or password')
+      if (currentUser.role === 'admin') {
+        navigate('/admin', { replace: true })
+      } else if (currentUser.role === 'candidate') {
+        navigate('/candidate', { replace: true })
+      } else {
+        navigate('/recruiter', { replace: true })
+      }
+    } catch (err: any) {
+      console.error('Sign-in error:', err)
+      const detail = err?.response?.data?.detail
+      const message = typeof detail === 'string' ? detail : (err?.message || 'Invalid email or password')
+      toast.error(message)
     } finally {
       setLoading(false)
     }
@@ -97,15 +118,15 @@ export const LoginPage: React.FC = () => {
               </Button>
             </form>
 
-            {/* Quick Demo Access */}
+            {/* Quick Demo Access for Staff Testing */}
             <div className="mt-6 pt-5 border-t border-obsidian-border space-y-2">
-              <p className="text-[10px] font-bold uppercase tracking-wider text-sage-muted text-center">1-Click Demo Portals</p>
-              <div className="grid grid-cols-3 gap-2">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-sage-muted text-center">Staff Testing Access</p>
+              <div className="grid grid-cols-2 gap-2">
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="text-xs font-medium gap-1 bg-charcoal-light border-obsidian-border text-warm-white hover:border-emerald hover:text-emerald"
+                  className="text-xs font-medium gap-1.5 bg-charcoal-light border-obsidian-border text-warm-white hover:border-emerald hover:text-emerald"
                   onClick={() => handleQuickLogin('recruiter@recruitment.ai', 'recruiter')}
                 >
                   <UserCheck className="w-3.5 h-3.5 text-emerald" />
@@ -115,17 +136,7 @@ export const LoginPage: React.FC = () => {
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="text-xs font-medium gap-1 bg-charcoal-light border-obsidian-border text-warm-white hover:border-champagne hover:text-champagne"
-                  onClick={() => handleQuickLogin('candidate@recruitment.ai', 'candidate')}
-                >
-                  <User className="w-3.5 h-3.5 text-champagne" />
-                  Candidate
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="text-xs font-medium gap-1 bg-charcoal-light border-obsidian-border text-warm-white hover:border-sage hover:text-sage"
+                  className="text-xs font-medium gap-1.5 bg-charcoal-light border-obsidian-border text-warm-white hover:border-sage hover:text-sage"
                   onClick={() => handleQuickLogin('admin@recruitment.ai', 'admin')}
                 >
                   <ShieldCheck className="w-3.5 h-3.5 text-sage" />

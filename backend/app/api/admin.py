@@ -26,18 +26,6 @@ def api_admin_stats(db: Session = Depends(get_db)):
 @router.get("/audit-logs")
 def api_get_audit_logs(page: int = 1, per_page: int = 50, db: Session = Depends(get_db)):
     logs = db.query(AuditLog).order_by(AuditLog.created_at.desc()).offset((page - 1) * per_page).limit(per_page).all()
-    if not logs:
-        # Seed default logs for audit trail demo
-        from datetime import datetime
-        default_logs = [
-            AuditLog(action="USER_LOGIN", entity_type="user", entity_id="admin-1", details={"ip": "127.0.0.1", "browser": "Chrome"}),
-            AuditLog(action="RESUME_UPLOAD", entity_type="resume", entity_id="res-1", details={"files_count": 5, "source": "recruiter"}),
-            AuditLog(action="AI_SCREENING_RUN", entity_type="screening", entity_id="scr-1", details={"score": 92.5, "model": "all-MiniLM-L6-v2"}),
-            AuditLog(action="CANDIDATE_SHORTLIST", entity_type="application", entity_id="app-1", details={"decision": "shortlisted", "by": "recruiter@recruitment.ai"}),
-        ]
-        db.add_all(default_logs)
-        db.commit()
-        logs = default_logs
     return logs
 
 @router.get("/users")

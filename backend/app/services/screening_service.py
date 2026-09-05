@@ -18,6 +18,8 @@ def analyze_candidate(db: Session, application_id: str) -> ScreeningResult:
         
     job = db.query(Job).filter(Job.id == app.job_id).first()
     resume = db.query(Resume).filter(Resume.id == app.resume_id).first()
+    if not job or not resume:
+        return None
     
     weights = db.query(ScoreWeight).filter(ScoreWeight.job_id == job.id).first()
     w_dict = {

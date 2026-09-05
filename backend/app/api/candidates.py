@@ -33,13 +33,16 @@ def is_resume_valid(resume: Optional[Resume]) -> bool:
         return False
     if not getattr(resume, 'is_processed', False):
         return False
-    if not resume.file_path or not os.path.exists(resume.file_path):
-        return False
     if not resume.raw_text or len(resume.raw_text.strip()) < 15:
         return False
     if resume.filename and (resume.filename.endswith('_Profile.txt') or 'Profile.txt' in resume.filename):
         return False
-    return True
+    # Resume is valid if file exists on disk or if actual parsed sections are present
+    if resume.file_path and os.path.exists(resume.file_path):
+        return True
+    if resume.parsed_sections and len(resume.parsed_sections) > 0:
+        return True
+    return False
 
 
 def get_or_create_candidate_for_user(db: Session, user: User) -> Candidate:
@@ -255,7 +258,7 @@ def api_get_my_candidate_dashboard(current_user: User = Depends(get_current_user
             "location": job.location if job else "",
             "status": stat.recruiter_decision if (stat and stat.recruiter_decision) else a.status,
             "applied_at": str(a.applied_at),
-            "match_score": scr.overall_score if scr else 75.0
+            "match_score": scr.overall_score if scr else None
         })
 
     return {
@@ -618,8 +621,8 @@ def api_get_my_applications(current_user: User = Depends(get_current_user), db: 
             "salary_range": job.salary_range if job else "",
             "status": status_val or "Applied",
             "applied_at": str(a.applied_at),
-            "match_score": scr.overall_score if scr else 75.0,
-            "ai_recommendation": scr.interview_recommendation if scr else "consider"
+            "match_score": scr.overall_score if scr else None,
+            "ai_recommendation": scr.interview_recommendation if scr else "pending"
         })
     return results
 

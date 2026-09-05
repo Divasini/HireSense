@@ -37,3 +37,4 @@ backend/*.db
 
 # Uploaded resume files
 backend/uploads/
+

@@ -34,7 +34,7 @@ export const LoginPage: React.FC = () => {
 
     try {
       setLoading(true)
-      await login(email.trim(), password)
+      await login(email.trim().toLowerCase(), password)
       
       const currentUser = useAuthStore.getState().user
       if (!currentUser) {

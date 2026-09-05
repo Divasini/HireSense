@@ -27,7 +27,7 @@ export const RegisterPage: React.FC = () => {
 
     try {
       setLoading(true)
-      await register(email, password, fullName, role)
+      await register(email.trim().toLowerCase(), password, fullName.trim(), role)
       toast.success('Registration successful!')
       if (role === 'recruiter') navigate('/recruiter')
       else navigate('/candidate')

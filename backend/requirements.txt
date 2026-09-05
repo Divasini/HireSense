@@ -20,3 +20,6 @@ reportlab==4.2.5
 fpdf2==2.8.2
 filetype==1.2.0
 psycopg2-binary
+filetype==1.2.0
+psycopg2-binary
+email-validator

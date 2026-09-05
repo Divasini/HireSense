@@ -1,0 +1,23 @@
+
+    PRIYA GUNASEKARAN
+    Pudukkottai, Tamil Nadu, India | +91 9444332211 | candidate.workflow.v2@domain.com
+
+    PROFESSIONAL SUMMARY
+    Computer Vision and Machine Learning Engineer with 3+ years of experience engineering PyTorch neural network architectures, OpenCV image processing pipelines, and FastAPI inference services.
+
+    SKILLS
+    Languages: Python, C++, SQL
+    Machine Learning: PyTorch, TensorFlow, OpenCV, Scikit-learn, CNN, Computer Vision, Deep Learning, NLP
+    Cloud & Tools: Docker, Kubernetes, AWS, Git, Linux, FastAPI, PostgreSQL
+
+    EXPERIENCE
+    Computer Vision Engineer | VisionTech Labs | 2022 - Present
+    - Architected real-time object detection models using PyTorch and YOLO with 98.4% precision.
+    - Optimized inference throughput using TensorRT, reducing latency from 60ms to 14ms on AWS EC2 instances.
+
+    EDUCATION
+    B.Tech in Artificial Intelligence & Data Science | Anna University | 2018 - 2022 | CGPA: 8.8/10
+
+    PROJECTS
+    Autonomous Visual Inspection System: Built automated defect segmentation with PyTorch and OpenCV.
+    

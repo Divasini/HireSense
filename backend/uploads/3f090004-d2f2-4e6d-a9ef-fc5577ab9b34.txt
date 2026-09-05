@@ -1,0 +1,6 @@
+
+Kavitha Raman - Senior AI Specialist
+Chennai, India | kavitha.raman@testmail.com
+TECHNICAL SKILLS: Machine Learning, Deep Learning, Python, PyTorch, TensorFlow, Natural Language Processing, Computer Vision, MLOps, Docker
+EXPERIENCE: AI Research Engineer at Apex Labs (2021-Present). Trained computer vision neural networks.
+EDUCATION: Master of Science in Artificial Intelligence.

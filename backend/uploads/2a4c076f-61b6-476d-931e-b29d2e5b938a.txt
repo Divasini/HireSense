@@ -1,0 +1,26 @@
+
+Kavitha Raman
+Chennai, Tamil Nadu, India | kavitha.raman@testmail.com | +91 9876543210
+LinkedIn: https://linkedin.com/in/kavitha-raman
+
+SUMMARY
+Results-driven Full Stack Engineer with 4 years of experience architecting cloud applications.
+Proficient in Python, FastAPI, React, TypeScript, PostgreSQL, and AWS.
+
+TECHNICAL SKILLS
+Languages: Python, TypeScript, JavaScript, SQL, HTML, CSS
+Frameworks: FastAPI, React, Node.js, Next.js, Express.js
+Databases: PostgreSQL, Redis, MongoDB
+Cloud & DevOps: AWS, Docker, Kubernetes, CI/CD, Git
+
+PROFESSIONAL EXPERIENCE
+Senior Software Engineer | Cognizant Technology Solutions | 2022 - Present
+- Architected enterprise REST APIs using FastAPI and PostgreSQL handling 50k rpm.
+- Developed interactive web portals using React, TypeScript, and Tailwind CSS.
+- Automated deployment workflows using Docker containers and AWS ECS.
+
+EDUCATION
+Bachelor of Engineering in Computer Science | Anna University (2018 - 2022) | CGPA: 8.9/10
+
+PROJECTS
+CloudRecruit AI: Built resume screening system with semantic search and FastAPI.

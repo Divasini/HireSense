@@ -1,0 +1,27 @@
+
+    DIVASINI GUNASEKARAN
+    Chennai, India | +91 9876543210 | test.candidate.e2e@domain.com | https://linkedin.com/in/divasini-g
+
+    PROFESSIONAL SUMMARY
+    Dynamic AI & Full Stack Engineer with 3.5+ years experience building production-grade FastAPI and React applications.
+
+    SKILLS
+    Languages: Python, JavaScript, TypeScript, SQL, HTML, CSS
+    Frameworks & Libraries: FastAPI, React, Node.js, Express.js, PyTorch, Scikit-learn, spaCy, Tailwind CSS
+    Databases & Cloud: PostgreSQL, MongoDB, Redis, Docker, Kubernetes, AWS, Git, CI/CD
+
+    EXPERIENCE
+    AI Platform Engineer | Apex AI Systems | 2023 - Present
+    - Designed and implemented high-throughput REST APIs using FastAPI and PostgreSQL.
+    - Built semantic resume parsing and candidate ranking microservices with sentence-transformers.
+    
+    Software Engineer | TechLabs Inc. | 2021 - 2023
+    - Built responsive frontend modules in React and TypeScript with Tailwind CSS.
+    - Integrated third-party RESTful APIs and PostgreSQL databases.
+
+    EDUCATION
+    Bachelor of Technology in Computer Science | Anna University | 2017 - 2021 | GPA: 8.8/10
+
+    PROJECTS
+    HireSense AI: Full-stack recruitment platform with ATS scoring and semantic candidate matching.
+    

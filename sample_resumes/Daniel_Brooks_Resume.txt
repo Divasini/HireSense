@@ -1,0 +1,17 @@
+Daniel Brooks - DevOps & Cloud Infrastructure Engineer
+Email: daniel.brooks@email.com | Location: Seattle, WA | Phone: +1 206-555-0144
+
+PROFESSIONAL SUMMARY:
+DevOps Engineer with 3+ years experience automating cloud deployments using Docker, Kubernetes, AWS, Terraform, and CI/CD pipelines.
+
+TECHNICAL SKILLS:
+Docker, Kubernetes, AWS, Terraform, CI/CD, Linux, Python, Bash, Prometheus, Grafana, Ansible, Git
+
+WORK EXPERIENCE:
+Cloud DevOps Engineer - NorthStar Cloud (2022 - Present)
+- Managed production Kubernetes clusters on AWS EKS with zero downtime.
+- Authored modular Terraform scripts provisioning VPCs, IAM roles, and auto-scaling groups.
+- Configured Grafana and Prometheus monitoring alerts reducing incident MTTR by 35%.
+
+EDUCATION:
+Bachelor of Science in Information Technology - University of Washington (2021)

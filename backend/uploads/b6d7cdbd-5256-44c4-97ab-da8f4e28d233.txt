@@ -1,0 +1,28 @@
+
+    KAVITHA RAMAN
+    Coimbatore, Tamil Nadu, India | +91 9876543211 | unlocked.flow.test@domain.com
+
+    PROFESSIONAL SUMMARY
+    Senior Software Engineer with 4 years of hands-on experience designing distributed Python backends, FastAPI microservices, and React web applications.
+
+    SKILLS
+    Languages: Python, JavaScript, TypeScript, SQL
+    Frameworks: FastAPI, Flask, React, Node.js, Next.js, Tailwind CSS
+    Databases & Cloud: PostgreSQL, Redis, Docker, Kubernetes, AWS, Git, CI/CD
+    Concepts: RESTful APIs, Microservices, Async I/O, Database Indexing, Caching
+
+    EXPERIENCE
+    Senior Backend Engineer | CloudMatrix Solutions | 2022 - Present
+    - Architected high-throughput REST APIs using FastAPI and PostgreSQL handling 50k daily active requests.
+    - Optimized database query latency by 45% using composite indexing and connection pooling.
+    
+    Software Developer | DataSphere Tech | 2020 - 2022
+    - Developed reactive user interfaces using React, TypeScript, and Tailwind CSS.
+    - Integrated Redis caching layers to reduce server response times from 350ms to 45ms.
+
+    EDUCATION
+    B.E. in Computer Science & Engineering | PSG College of Technology | 2016 - 2020 | GPA: 8.9/10
+
+    PROJECTS
+    Enterprise Data Pipeline: Built an automated ETL pipeline with Python, PostgreSQL, and Docker.
+    

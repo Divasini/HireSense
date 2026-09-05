@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Obsidian Intelligence Theme Variables */
+    --background: 165 14% 6%; /* #0D1110 */
+    --foreground: 48 33% 94%; /* #F5F3EA */
+    --card: 154 14% 10%; /* #151C19 */
+    --card-foreground: 48 33% 94%; /* #F5F3EA */
+    --popover: 154 14% 10%;
+    --popover-foreground: 48 33% 94%;
+    --primary: 168 100% 36%; /* Emerald #00B894 */
+    --primary-foreground: 165 14% 6%;
+    --secondary: 154 12% 14%; /* Charcoal forest light #1D2723 */
+    --secondary-foreground: 156 22% 64%; /* Sage #8FB9A8 */
+    --muted: 154 12% 14%;
+    --muted-foreground: 154 8% 69%; /* #AAB8B1 */
+    --accent: 43 69% 69%; /* Champagne Gold #E8C97A */
+    --accent-foreground: 165 14% 6%;
+    --destructive: 11 72% 61%; /* Coral #E17055 */
+    --destructive-foreground: 48 33% 94%;
+    --border: 156 12% 18%; /* #24322C */
+    --input: 156 12% 18%;
+    --ring: 168 100% 36%; /* Emerald */
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: #0D1110;
+    color: #F5F3EA;
+  }
+}
+
+/* Custom Obsidian Intelligence Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0D1110;
+}
+::-webkit-scrollbar-thumb {
+  background: #24322C;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00B894;
+}
+
+/* Obsidian Glassmorphism */
+.glass-obsidian {
+  background: rgba(21, 28, 25, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(143, 185, 168, 0.12);
+}
+
+.glass-emerald {
+  background: rgba(0, 184, 148, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 184, 148, 0.25);
+}
+
+.glass-champagne {
+  background: rgba(232, 201, 122, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 201, 122, 0.28);
+}
+

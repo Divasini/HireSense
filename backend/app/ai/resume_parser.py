@@ -66,8 +66,9 @@ def extract_personal_info(text: str) -> Dict[str, Any]:
     nlp = ModelManager().get_nlp()
     doc = nlp(text[:500])
     for ent in doc.ents:
-        if ent.label_ == "PERSON" and len(ent.text.split()) <= 4 and "@" not in ent.text and "http" not in ent.text:
-            name = ent.text.strip()
+        cleaned_ent = ent.text.split('\n')[0].strip()
+        if ent.label_ == "PERSON" and len(cleaned_ent.split()) <= 4 and "@" not in cleaned_ent and "http" not in cleaned_ent and cleaned_ent:
+            name = cleaned_ent
             break
 
     if not name:

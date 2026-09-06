@@ -82,13 +82,8 @@ def on_startup():
     except Exception as e:
         print(f"Notice: Staff account initialization check: {e}")
 
-    # Background warm-up
-    import threading
-    def load():
-        from app.ai.model_manager import ModelManager
-        ModelManager().get_nlp()
-        ModelManager().get_embedder()
-    threading.Thread(target=load).start()
+    # Heavy AI models are strictly lazy-loaded on-demand to maintain < 512MB RAM on Render
+    # No startup pre-warming thread to prevent startup OOM crashes
 
 @app.get("/api/health")
 def health_check():

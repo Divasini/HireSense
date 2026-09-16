@@ -9,10 +9,10 @@ from sqlalchemy.orm.attributes import flag_modified
 from app.database import get_db
 from app.models.user import User
 from app.models.candidate import Candidate
-from app.models.resume import Resume
+from app.models.resume import Resume, ResumeSkill
 from app.models.job import Job
 from app.models.application import Application, CandidateStatus
-from app.models.screening import ScreeningResult
+from app.models.screening import ScreeningResult, SkillGap
 from app.models.notification import Notification
 from app.models.interview_session import InterviewSession
 from app.schemas.candidate import CandidateResponse, CandidateListResponse, CandidateSearchParams
@@ -409,10 +409,74 @@ def api_delete_my_resume(resume_id: str, current_user: User = Depends(get_curren
     r = db.query(Resume).filter(Resume.id == resume_id, Resume.candidate_id == cand.id).first()
     if not r:
         raise HTTPException(status_code=404, detail="Resume not found")
+
+    # 1. Clean up child resume skills
+    db.query(ResumeSkill).filter(ResumeSkill.resume_id == r.id).delete()
+
+    # 2. Check if another valid resume version exists for this candidate
+    other_resumes = db.query(Resume).filter(
+        Resume.candidate_id == cand.id,
+        Resume.id != r.id
+    ).order_by(Resume.created_at.desc()).all()
+    
+    fallback_resume = next((res for res in other_resumes if is_resume_valid(res)), None)
+
+    if fallback_resume:
+        # Re-point existing applications and interview sessions to the next active resume
+        db.query(Application).filter(Application.resume_id == r.id).update({'resume_id': fallback_resume.id})
+        db.query(InterviewSession).filter(InterviewSession.resume_id == r.id).update({'resume_id': fallback_resume.id})
         
+        # Sync candidate parsed_data from fallback resume
+        if fallback_resume.parsed_sections:
+            sections = fallback_resume.parsed_sections
+            parsed = dict(cand.parsed_data or {})
+            extracted_skill_names = [s.get("name") if isinstance(s, dict) else str(s) for s in sections.get("skills", [])]
+            parsed["skills"] = extracted_skill_names
+            for sec_key in ["experience", "education", "projects", "certifications", "summary"]:
+                if sections.get(sec_key):
+                    parsed[sec_key] = sections[sec_key]
+            cand.parsed_data = parsed
+            flag_modified(cand, "parsed_data")
+    else:
+        # Candidate deleted their only resume: clean up applications and unbind interview sessions
+        linked_apps = db.query(Application).filter(Application.resume_id == r.id).all()
+        for app in linked_apps:
+            scrs = db.query(ScreeningResult).filter(ScreeningResult.application_id == app.id).all()
+            for scr in scrs:
+                db.query(SkillGap).filter(SkillGap.screening_result_id == scr.id).delete()
+                db.delete(scr)
+            db.query(CandidateStatus).filter(CandidateStatus.application_id == app.id).delete()
+            db.delete(app)
+        
+        db.query(InterviewSession).filter(InterviewSession.resume_id == r.id).update({'resume_id': None})
+        
+        # Reset parsed resume profile data so profile and dashboard accurately reflect 0 resumes
+        parsed = dict(cand.parsed_data or {})
+        parsed["skills"] = []
+        parsed["experience"] = []
+        parsed["education"] = []
+        parsed["projects"] = []
+        parsed["certifications"] = []
+        parsed["summary"] = ""
+        cand.parsed_data = parsed
+        flag_modified(cand, "parsed_data")
+
+    # 3. Clean up physical file if it exists on disk
+    if r.file_path and os.path.exists(r.file_path):
+        try:
+            os.remove(r.file_path)
+        except Exception:
+            pass
+
+    # 4. Delete resume record from database
     db.delete(r)
     db.commit()
-    return {"status": "success", "message": "Resume version deleted"}
+    
+    return {
+        "status": "success",
+        "message": "Resume deleted successfully",
+        "remaining_resumes": len(other_resumes)
+    }
 
 
 # ==========================================

@@ -135,13 +135,14 @@ export const MyResumePage: React.FC = () => {
   }
 
   const handleDeleteVersion = async (id: string) => {
-    if (!confirm('Are you sure you want to remove this resume version?')) return
+    if (!confirm('Are you sure you want to delete this resume? You can delete and re-upload resumes at any time with no limits.')) return
     try {
       await deleteMyResume(id)
-      toast.success('Resume version removed')
-      fetchData()
-    } catch {
-      toast.error('Failed to delete resume')
+      toast.success('Resume deleted successfully')
+      await fetchData()
+    } catch (err: any) {
+      const msg = err?.response?.data?.detail || err?.message || 'Failed to delete resume'
+      toast.error(msg)
     }
   }
 
@@ -347,22 +348,34 @@ export const MyResumePage: React.FC = () => {
             )}
 
             {/* Quick Link Buttons */}
-            <div className="pt-3 flex flex-wrap gap-2 border-t border-obsidian-border">
-              <Link to="/candidate/quality">
-                <Button size="sm" variant="outline" className="text-xs border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/10">
-                  <ShieldCheck className="w-3.5 h-3.5 mr-1" /> View Quality Report
-                </Button>
-              </Link>
-              <Link to="/candidate/ats-score">
-                <Button size="sm" variant="outline" className="text-xs border-champagne/20 text-champagne hover:bg-champagne/10">
-                  <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> View ATS Checklist
-                </Button>
-              </Link>
-              <Link to="/candidate/recommended-jobs">
-                <Button size="sm" className="bg-emerald-500 hover:bg-emerald-600 text-obsidian font-bold text-xs">
-                  <Briefcase className="w-3.5 h-3.5 mr-1" /> View AI Job Matches
-                </Button>
-              </Link>
+            <div className="pt-3 flex flex-wrap items-center justify-between gap-2 border-t border-obsidian-border">
+              <div className="flex flex-wrap gap-2">
+                <Link to="/candidate/quality">
+                  <Button size="sm" variant="outline" className="text-xs border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/10">
+                    <ShieldCheck className="w-3.5 h-3.5 mr-1" /> View Quality Report
+                  </Button>
+                </Link>
+                <Link to="/candidate/ats-score">
+                  <Button size="sm" variant="outline" className="text-xs border-champagne/20 text-champagne hover:bg-champagne/10">
+                    <CheckCircle2 className="w-3.5 h-3.5 mr-1" /> View ATS Checklist
+                  </Button>
+                </Link>
+                <Link to="/candidate/recommended-jobs">
+                  <Button size="sm" className="bg-emerald-500 hover:bg-emerald-600 text-obsidian font-bold text-xs">
+                    <Briefcase className="w-3.5 h-3.5 mr-1" /> View AI Job Matches
+                  </Button>
+                </Link>
+              </div>
+
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => handleDeleteVersion(activeResume.id)}
+                className="text-xs text-sage-muted hover:text-coral hover:bg-coral/10 border border-transparent hover:border-coral/20"
+                title="Delete this resume"
+              >
+                <Trash2 className="w-3.5 h-3.5 mr-1 text-coral" /> Delete Resume
+              </Button>
             </div>
           </CardContent>
         </Card>
